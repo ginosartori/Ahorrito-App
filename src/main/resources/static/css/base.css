@@ -1,0 +1,104 @@
+/* --- RESET & GENERAL --- */
+:root {
+    /* Design Tokens - Lighter Obsidian & High Transparency */
+    --bg-main: #101015;
+    --bg-sidebar: #171721;
+    --bg-card: rgba(28, 28, 36, 0.48);
+    --bg-card-hover: rgba(40, 40, 52, 0.58);
+    --border-premium: rgba(255, 255, 255, 0.11);
+    --border-premium-hover: rgba(255, 255, 255, 0.22);
+
+    /* Champagne Gold Accents */
+    --gold: #dcb342;
+    --gold-rgb: 220, 179, 66;
+    --gold-light: #f3d478;
+    --gold-dark: #b89128;
+
+    /* Transaction Colors */
+    --green-accent: #52c488;
+    --blue-accent: #4fa4cf;
+    --danger: #e26161;
+    --danger-rgb: 226, 97, 97;
+
+    /* Typography Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-gold: #f0db87;
+
+    /* System Properties */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --glass-blur: blur(20px);
+    --shadow-lux: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
+    --shadow-gold: 0 0 25px rgba(220, 179, 66, 0.12);
+
+    /* Toast properties */
+    --bg-toast: rgba(24, 24, 32, 0.95);
+    --shadow-toast: var(--shadow-lux);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Custom Scrollbars */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) var(--bg-main);
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
+
+body.light-theme {
+    scrollbar-color: rgba(0, 0, 0, 0.15) var(--bg-main);
+}
+
+body.light-theme ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}

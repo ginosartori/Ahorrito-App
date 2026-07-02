@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorrito</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="css/styles.css?v=1.0.2">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <!-- Ambient Glow Background Blobs -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- App Container -->
+    <div class="app-container">
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo" id="logo-home-btn" title="Ir al Dashboard" style="cursor: pointer;">
+                <div class="logo-icon">
+                    <i data-lucide="sparkles"></i>
+                </div>
+                <span class="logo-text">AHORRITO</span>
+                <button class="btn-sidebar-toggle" id="btn-sidebar-toggle" title="Contraer/Expandir menú">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-target="panel-dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-btn" data-target="panel-carteras">
+                    <i data-lucide="wallet"></i>
+                    <span>Billeteras</span>
+                </button>
+                <button class="nav-btn" data-target="panel-transacciones">
+                    <i data-lucide="arrow-left-right"></i>
+                    <span>Transacciones</span>
+                </button>
+                <button class="nav-btn" data-target="panel-categorias">
+                    <i data-lucide="tags"></i>
+                    <span>Categorías</span>
+                </button>
+                <button class="nav-btn" data-target="panel-checklist">
+                    <i data-lucide="check-square"></i>
+                    <span>Checklist</span>
+                </button>
+                <button class="nav-btn" data-target="panel-calendario">
+                    <i data-lucide="calendar"></i>
+                    <span>Calendario</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile" id="user-profile-container" title="Editar perfil">
+                    <div class="avatar" id="user-avatar">G</div>
+                    <div class="user-info">
+                        <p class="user-name" id="user-name-display">Presioná acá para modificar tu nombre</p>
+                        <p class="user-role" id="user-role-display"></p>
+                    </div>
+                </div>
+                <!-- Dropdown de Personalización Estética (Discreto) & Cerrar Sesión -->
+                <div class="theme-popover-container">
+                    <button class="btn-icon-only" id="btn-toggle-theme-menu" title="Ajustes de diseño">
+                        <i data-lucide="settings"></i>
+                    </button>
+                    <form action="/logout" method="POST" style="margin: 0; padding: 0; display: inline-flex;">
+                        <button type="submit" class="btn-icon-only" title="Cerrar sesión" style="color: var(--text-muted);">
+                            <i data-lucide="log-out"></i>
+                        </button>
+                    </form>
+                    <div class="theme-popover-menu" id="theme-popover-menu">
+                        <p class="customizer-title">Ajustes</p>
+                        
+                        <!-- Transparencias Switch -->
+                        <div class="settings-row">
+                            <span class="settings-label" title="Desactivar transparencias para buscar mayor rendimiento">Transparencias</span>
+                            <label class="switch-premium">
+                                <input type="checkbox" id="switch-transparency" checked>
+                                <span class="slider-premium"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Animaciones Switch -->
+                        <div class="settings-row">
+                            <span class="settings-label" title="Desactivar animaciones y transiciones de CSS para buscar mayor rendimiento">Animaciones</span>
+                            <label class="switch-premium">
+                                <input type="checkbox" id="switch-animations" checked>
+                                <span class="slider-premium"></span>
+                            </label>
+                        </div>
+                        
+                        <p class="customizer-label" style="margin-top: 12px;">TEMA DE LA PLATAFORMA</p>
+                        <div class="themes-grid">
+                            <button class="theme-btn active" data-theme="classic-dark" title="Clásico Oscuro">
+                                <span class="theme-color-preview" style="background: linear-gradient(135deg, #101015 50%, #dcb342 50%);"></span>
+                                <span class="theme-btn-label">Oscuro</span>
+                            </button>
+                            <button class="theme-btn" data-theme="classic-light" title="Clásico Claro">
+                                <span class="theme-color-preview" style="background: linear-gradient(135deg, #f3f4f8 50%, #dcb342 50%);"></span>
+                                <span class="theme-btn-label">Claro</span>
+                            </button>
+                            <button class="theme-btn" data-theme="crema-beige" title="Crema Beige">
+                                <span class="theme-color-preview" style="background: linear-gradient(135deg, #f7f4eb 50%, #b89128 50%);"></span>
+                                <span class="theme-btn-label">Crema</span>
+                            </button>
+                            <button class="theme-btn" data-theme="plum" title="Ciruela Cálida">
+                                <span class="theme-color-preview" style="background: linear-gradient(135deg, #0c0612 50%, #c084fc 50%);"></span>
+                                <span class="theme-btn-label">Ciruela</span>
+                            </button>
+                            <button class="theme-btn" data-theme="emerald" title="Bosque Esmeralda">
+                                <span class="theme-color-preview" style="background: linear-gradient(135deg, #070e0b 50%, #52c488 50%);"></span>
+                                <span class="theme-btn-label">Esmeralda</span>
+                            </button>
+                            <button class="theme-btn" data-theme="sapphire" title="Zafiro Nocturno">
+                                <span class="theme-color-preview" style="background: linear-gradient(135deg, #030a16 50%, #4fa4cf 50%);"></span>
+                                <span class="theme-btn-label">Zafiro</span>
+                            </button>
+                            <button class="theme-btn" data-theme="carbon-copper" title="Cobre Imperial">
+                                <span class="theme-color-preview" style="background: linear-gradient(135deg, #09090b 50%, #f97316 50%);"></span>
+                                <span class="theme-btn-label">Cobre</span>
+                            </button>
+                            <button class="theme-btn" data-theme="midnight-aurora" title="Tundra Aurora">
+                                <span class="theme-color-preview" style="background: linear-gradient(135deg, #050811 50%, #2dd4bf 50%);"></span>
+                                <span class="theme-btn-label">Aurora</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+                <div class="topbar-welcome">
+                    <h1 id="page-title">Dashboard</h1>
+                    <p class="text-muted" id="topbar-date">Cargando fecha...</p>
+                </div>
+                <div class="topbar-actions">
+                    <button class="btn btn-gold" id="btn-add-transaccion-shortcut">
+                        <i data-lucide="plus"></i>
+                        <span>Nueva Transacción</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- PANEL: DASHBOARD -->
+            <section id="panel-dashboard" class="content-panel active">
+                <!-- Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card gold-border">
+                        <div class="metric-header">
+                            <span class="metric-title">Balance Total</span>
+                            <div class="metric-icon gold"><i data-lucide="banknote"></i></div>
+                        </div>
+                        <h2 class="metric-value" id="metric-balance">$0.00</h2>
+                        <p class="metric-footer text-gold"><i data-lucide="check"></i> Suma de tus carteras activas</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Ahorros acumulados</span>
+                            <div class="metric-icon"><i data-lucide="piggy-bank"></i></div>
+                        </div>
+                        <h2 class="metric-value" id="metric-ahorros">$0.00</h2>
+                        <p class="metric-footer text-muted">Destinado a tus objetivos</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Gastos del mes</span>
+                            <div class="metric-icon"><i data-lucide="trending-up"></i></div>
+                        </div>
+                        <h2 class="metric-value" id="metric-gastos">$0.00</h2>
+                        <p class="metric-footer text-muted" id="metric-gastos-count">0 consumos registrados</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Ingresos del mes</span>
+                            <div class="metric-icon"><i data-lucide="trending-down"></i></div>
+                        </div>
+                        <h2 class="metric-value" id="metric-ingresos">$0.00</h2>
+                        <p class="metric-footer text-muted" id="metric-ingresos-count">0 entradas registradas</p>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="dashboard-charts-grid">
+                    <div class="chart-card">
+                        <h3 class="card-title">Consumos por categorías</h3>
+                        <div class="chart-container">
+                            <canvas id="chart-categorias"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3 class="card-title">Comparativa mensual</h3>
+                        <div class="chart-container">
+                            <canvas id="chart-mensual"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="recent-transactions-card">
+                    <div class="card-header-flex">
+                        <h3 class="card-title">Actividades recientes</h3>
+                        <button class="btn btn-outline btn-sm" id="btn-view-all-transacciones">Ver historial</button>
+                    </div>
+                    <div class="transactions-list" id="recent-transactions-list">
+                        <div class="no-data">No hay transacciones recientes registradas.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PANEL: CARTERAS Y METAS -->
+            <section id="panel-carteras" class="content-panel">
+                <div class="section-header-flex">
+                    <h2>Tus billeteras</h2>
+                    <button class="btn btn-outline btn-sm" id="btn-new-cartera">
+                        <i data-lucide="plus"></i><span>Nueva billetera</span>
+                    </button>
+                </div>
+
+                <div class="carteras-grid" id="wallets-container">
+                    <!-- Carteras inyectadas dinámicamente -->
+                </div>
+
+                <div class="section-header-flex" style="margin-top: 48px;">
+                    <h2>Ahorros</h2>
+                    <button class="btn btn-outline btn-sm" id="btn-new-meta">
+                        <i data-lucide="plus"></i><span>Nuevo objetivo</span>
+                    </button>
+                </div>
+
+                <div class="carteras-grid" id="goals-container">
+                    <!-- Objetivos inyectados dinámicamente -->
+                </div>
+            </section>
+
+            <!-- PANEL: TRANSACCIONES -->
+            <section id="panel-transacciones" class="content-panel">
+                <div class="filter-card">
+                    <div class="filters-grid">
+                        <div class="filter-group search">
+                            <label for="filter-search">Buscar descripción</label>
+                            <div class="input-icon-wrapper">
+                                <i data-lucide="search" class="input-icon"></i>
+                                <input type="text" id="filter-search" placeholder="Ej. Supermercado, Sueldo...">
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-tipo">Tipo</label>
+                            <select id="filter-tipo">
+                                <option value="">Todos los tipos</option>
+                                <option value="INGRESO">Ingresos</option>
+                                <option value="GASTO">Gastos</option>
+                                <option value="AHORRO">Ahorros</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-cartera">Billetera</label>
+                            <select id="filter-cartera">
+                                <option value="">Todas las billeteras</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-orden">Ordenar por</label>
+                            <select id="filter-orden">
+                                <option value="fecha-desc">Fecha: más reciente primero</option>
+                                <option value="fecha-asc">Fecha: más antiguo primero</option>
+                                <option value="monto-desc">Monto: mayor a menor</option>
+                                <option value="monto-asc">Monto: menor a mayor</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transactions Table -->
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Descripción</th>
+                                    <th>Tipo</th>
+                                    <th>Cartera / Meta</th>
+                                    <th>Categoría</th>
+                                    <th class="text-right">Monto</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transacciones-table-body">
+                                <!-- Transacciones inyectadas dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer" id="transacciones-table-footer">
+                        <span>Mostrando 0 registros</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PANEL: CATEGORIAS -->
+            <section id="panel-categorias" class="content-panel">
+                <div class="categories-actions">
+
+                    <button class="btn btn-gold" id="btn-new-categoria">
+                        <i data-lucide="plus"></i>
+                        <span>Nueva categoría</span>
+                    </button>
+                </div>
+
+                <div class="categories-grid" id="categories-grid">
+                    <!-- Categorías inyectadas dinámicamente -->
+                </div>
+            </section>
+
+            <!-- PANEL: CHECKLIST -->
+            <section id="panel-checklist" class="content-panel">
+                <!-- Resumen Checklist Tarjeta -->
+                <div class="metrics-grid" style="margin-bottom: 32px;">
+                    <div class="metric-card gold-border">
+                        <div class="metric-header">
+                            <span class="metric-title">Gastos Proyectados</span>
+                            <div class="metric-icon gold"><i data-lucide="dollar-sign"></i></div>
+                        </div>
+                        <h2 class="metric-value" id="checklist-metric-total">$0.00</h2>
+                        <p class="metric-footer text-gold" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; margin-top: auto;">
+                            <span><i data-lucide="info"></i> Total este mes</span>
+                            <span id="checklist-next-month-link" style="color:var(--text-muted); cursor:pointer; font-weight:500; text-decoration:underline; font-size:11px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='var(--text-muted)'">Próx. mes: $0.00</span>
+                        </p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Pagado / Completado</span>
+                            <div class="metric-icon"><i data-lucide="check-circle-2"></i></div>
+                        </div>
+                        <h2 class="metric-value" id="checklist-metric-pagado">$0.00</h2>
+                        <p class="metric-footer text-muted" id="checklist-metric-pagado-count">0 de 0 ítems</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Pendiente</span>
+                            <div class="metric-icon"><i data-lucide="clock"></i></div>
+                        </div>
+                        <h2 class="metric-value" id="checklist-metric-pendiente">$0.00</h2>
+                        <p class="metric-footer text-muted">Aún por pagar en el mes</p>
+                    </div>
+                </div>
+
+                <div class="section-header-flex">
+                    <h2>Gastos Proyectados</h2>
+                    <button class="btn btn-gold" id="btn-new-gasto-checklist">
+                        <i data-lucide="plus"></i><span>Crear Gasto</span>
+                    </button>
+                </div>
+
+                <div class="checklist-container" id="checklist-container">
+                    <!-- Gastos de la checklist inyectados dinámicamente -->
+                </div>
+            </section>
+
+            <!-- PANEL: CALENDARIO -->
+            <section id="panel-calendario" class="content-panel">
+                <div class="calendar-layout">
+                    <!-- Calendario Grid -->
+                    <div class="calendar-grid-card">
+                        <div class="calendar-header-controls">
+                            <button class="btn-icon" id="btn-prev-month"><i data-lucide="chevron-left"></i></button>
+                            <h3 id="calendar-month-year" class="calendar-month-title">Junio 2026</h3>
+                            <button class="btn-icon" id="btn-next-month"><i data-lucide="chevron-right"></i></button>
+                        </div>
+                        <table class="calendar-table">
+                            <thead>
+                                <tr>
+                                    <th>Dom</th>
+                                    <th>Lun</th>
+                                    <th>Mar</th>
+                                    <th>Mié</th>
+                                    <th>Jue</th>
+                                    <th>Vie</th>
+                                    <th>Sáb</th>
+                                </tr>
+                            </thead>
+                            <tbody id="calendar-days-body">
+                                <!-- Días del calendario inyectados -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Eventos del día seleccionado -->
+                    <div class="calendar-sidebar-card">
+                        <div class="day-events-header">
+                            <h3 id="selected-day-title">Eventos para el 20/06/2026</h3>
+                        </div>
+                        <div class="day-events-list" id="day-events-list">
+                            <!-- Eventos inyectados -->
+                        </div>
+
+                        <button type="button" class="btn btn-gold w-100" id="btn-nuevo-evento" style="margin-top: 16px;">
+                            <i data-lucide="plus" style="width: 16px; height: 16px; margin-right: 6px;"></i>
+                            <span>Nuevo Recordatorio</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botón de acción flotante (FAB) para móviles -->
+                <button class="btn-fab btn-gold mobile-only" id="btn-fab-nuevo-evento" title="Programar recordatorio">
+                    <i data-lucide="plus"></i>
+                </button>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL: TRANSACCION (Ingreso / Gasto / Ahorro) -->
+    <div class="modal-overlay" id="modal-transaccion">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-transaccion-title">Nueva Transacción</h3>
+                <button class="modal-close" id="modal-transaccion-close"><i data-lucide="x"></i></button>
+            </div>
+            <form id="form-transaccion">
+                <input type="hidden" id="transaccion-id">
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="transaccion-tipo">Tipo de Operación</label>
+                        <select id="transaccion-tipo" required>
+                            <option value="GASTO">Gasto (-)</option>
+                            <option value="INGRESO">Ingreso (+)</option>
+                            <option value="AHORRO">Ahorro / Meta (+)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="transaccion-monto">Monto ($)</label>
+                        <input type="number" id="transaccion-monto" step="0.01" min="0.01" required placeholder="0.00">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="transaccion-descripcion">Descripción / Detalle</label>
+                    <input type="text" id="transaccion-descripcion" required
+                        placeholder="Ej. Compra mensual supermercado" maxlength="100">
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="transaccion-fecha">Fecha</label>
+                        <input type="date" id="transaccion-fecha" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transaccion-cartera">Cartera / Cuenta Afectada</label>
+                        <select id="transaccion-cartera" required>
+                            <option value="">Seleccione cuenta...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" id="transaccion-categoria-group">
+                    <div class="label-row-flex">
+                        <label for="transaccion-categoria" style="margin-bottom: 0;">Categoría (Solo para
+                            Gastos)</label>
+                        <button type="button" class="btn-quick-add" id="btn-quick-crear-categoria">
+                            <i data-lucide="plus"></i><span>Crear categoría</span>
+                        </button>
+                    </div>
+                    <select id="transaccion-categoria">
+                        <option value="">Seleccione categoría...</option>
+                    </select>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-transaccion">Cancelar</button>
+                    <button type="submit" class="btn btn-gold" id="btn-save-transaccion">Guardar transacción</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: CARTERA (Crear / Editar) -->
+    <div class="modal-overlay" id="modal-cartera">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-cartera-title">Nueva Cartera</h3>
+                <button class="modal-close" id="modal-cartera-close"><i data-lucide="x"></i></button>
+            </div>
+            <form id="form-cartera">
+                <input type="hidden" id="cartera-id">
+                <input type="hidden" id="cartera-es-objetivo" value="false">
+
+                <div class="form-group">
+                    <label for="cartera-nombre">Nombre de la Cuenta/Objetivo</label>
+                    <input type="text" id="cartera-nombre" required
+                        placeholder="Ej. Billetera de Efectivo, Cuenta de Banco" maxlength="100">
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="cartera-monto-actual" id="label-monto-actual">Saldo Inicial ($)</label>
+                        <input type="number" id="cartera-monto-actual" step="0.01" required placeholder="0.00">
+                    </div>
+                    <div class="form-group" id="group-monto-objetivo" style="display:none;">
+                        <label for="cartera-monto-objetivo">Monto Objetivo ($)</label>
+                        <input type="number" id="cartera-monto-objetivo" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cartera-descripcion">Descripción / Notas (Opcional)</label>
+                    <input type="text" id="cartera-descripcion" placeholder="Ej. Tarjeta de débito principal"
+                        maxlength="150">
+                </div>
+
+                <div class="form-group">
+                    <label>Color de Tarjeta / Meta</label>
+                    <div class="color-preset-picker" id="cartera-color-picker">
+                        <button type="button" class="color-btn active" data-color="gold"
+                            style="background-color: #dcb342;"></button>
+                        <button type="button" class="color-btn" data-color="green"
+                            style="background-color: #52c488;"></button>
+                        <button type="button" class="color-btn" data-color="blue"
+                            style="background-color: #4fa4cf;"></button>
+                        <button type="button" class="color-btn" data-color="purple"
+                            style="background-color: #a855f7;"></button>
+                        <button type="button" class="color-btn" data-color="rose"
+                            style="background-color: #ec4899;"></button>
+                        <button type="button" class="color-btn" data-color="red"
+                            style="background-color: #e26161;"></button>
+                        
+                        <div class="color-custom-picker">
+                            <div class="custom-color-input-wrapper" id="cartera-custom-color-wrapper">
+                                <input type="color" id="cartera-custom-color" value="#dcb342" title="Color personalizado">
+                            </div>
+                            <input type="text" id="cartera-custom-hex" class="custom-color-hex-input" placeholder="#DCB342" maxlength="7">
+                        </div>
+                    </div>
+                    <input type="hidden" id="cartera-color" value="gold">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-cartera">Cancelar</button>
+                    <button type="submit" class="btn btn-gold" id="btn-save-cartera">Guardar Cartera</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: CATEGORIA (Crear / Editar) -->
+    <div class="modal-overlay" id="modal-categoria">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-categoria-title">Nueva Categoría</h3>
+                <button class="modal-close" id="modal-categoria-close"><i data-lucide="x"></i></button>
+            </div>
+            <form id="form-categoria">
+                <input type="hidden" id="categoria-id">
+
+                <div class="form-group">
+                    <label for="categoria-nombre">Nombre de la Categoría</label>
+                    <input type="text" id="categoria-nombre" required placeholder="Ej. Comida, Transporte"
+                        maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria-descripcion">Descripción (Opcional)</label>
+                    <textarea id="categoria-descripcion" rows="3" placeholder="Descripción de la categoría..."
+                        maxlength="150"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria-limite">Límite de Gasto Mensual ($) (Opcional)</label>
+                    <input type="number" id="categoria-limite" step="0.01" min="0" placeholder="Ej. 50000.00 (Dejar vacío para sin límite)">
+                </div>
+
+                <div class="form-group">
+                    <label>Color de Categoría</label>
+                    <div class="color-preset-picker" id="categoria-color-picker">
+                        <button type="button" class="color-btn active" data-color="purple"
+                            style="background-color: #a855f7;"></button>
+                        <button type="button" class="color-btn" data-color="gold"
+                            style="background-color: #dcb342;"></button>
+                        <button type="button" class="color-btn" data-color="green"
+                            style="background-color: #52c488;"></button>
+                        <button type="button" class="color-btn" data-color="blue"
+                            style="background-color: #4fa4cf;"></button>
+                        <button type="button" class="color-btn" data-color="rose"
+                            style="background-color: #ec4899;"></button>
+                        <button type="button" class="color-btn" data-color="red"
+                            style="background-color: #e26161;"></button>
+                        
+                        <div class="color-custom-picker">
+                            <div class="custom-color-input-wrapper" id="categoria-custom-color-wrapper">
+                                <input type="color" id="categoria-custom-color" value="#a855f7" title="Color personalizado">
+                            </div>
+                            <input type="text" id="categoria-custom-hex" class="custom-color-hex-input" placeholder="#A855F7" maxlength="7">
+                        </div>
+                    </div>
+                    <input type="hidden" id="categoria-color" value="purple">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-categoria">Cancelar</button>
+                    <button type="submit" class="btn btn-gold" id="btn-save-categoria">Guardar Categoría</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: PERFIL (Editar) -->
+    <div class="modal-overlay" id="modal-perfil">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-perfil-title">Editar Perfil</h3>
+                <button class="modal-close" id="modal-perfil-close"><i data-lucide="x"></i></button>
+            </div>
+            <form id="form-perfil">
+                <div class="form-group">
+                    <label for="perfil-nombre">Nombre</label>
+                    <input type="text" id="perfil-nombre" required placeholder="Tu nombre" maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="perfil-rango">Apodo / Rango</label>
+                    <input type="text" id="perfil-rango" placeholder="Ej. Miembro Premium, Ahorrador Experto"
+                        maxlength="100">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-perfil">Cancelar</button>
+                    <button type="submit" class="btn btn-gold" id="btn-save-perfil">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONFIRM DIALOG -->
+    <div class="modal-overlay" id="modal-confirm">
+        <div class="modal-box modal-sm">
+            <div class="modal-header">
+                <h3>¿Confirmar eliminación?</h3>
+                <button class="modal-close" id="modal-confirm-close"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">Esta acción es irreversible y afectará a las transacciones vinculadas.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" id="btn-confirm-cancel">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btn-confirm-delete">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: EVENTO / RECORDATORIO (Crear / Editar) -->
+    <div class="modal-overlay" id="modal-evento">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-evento-title">Programar Recordatorio</h3>
+                <button class="modal-close" id="modal-evento-close"><i data-lucide="x"></i></button>
+            </div>
+            <form id="form-evento">
+                <input type="hidden" id="evento-id">
+                
+                <div class="form-group">
+                    <label for="evento-titulo">Título del Recordatorio</label>
+                    <input type="text" id="evento-titulo" required placeholder="Ej. Vencimiento Tarjeta" maxlength="100">
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="evento-tipo">Clasificación</label>
+                        <select id="evento-tipo" required>
+                            <option value="PAGO">Pago / Vencimiento</option>
+                            <option value="RECORDATORIO">Recordatorio</option>
+                            <option value="META">Meta / Ahorro</option>
+                            <option value="OTRO">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="evento-fecha">Fecha</label>
+                        <input type="date" id="evento-fecha" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="evento-descripcion">Notas / Descripción (Opcional)</label>
+                    <input type="text" id="evento-descripcion" placeholder="Ej. Pagar antes de las 18:00" maxlength="150">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-evento">Cancelar</button>
+                    <button type="submit" class="btn btn-gold" id="btn-save-evento">Guardar Recordatorio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: GASTO CHECKLIST (Crear / Editar) -->
+    <div class="modal-overlay" id="modal-gasto-checklist">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-gasto-checklist-title">Nuevo Gasto Proyectado</h3>
+                <button class="modal-close" id="modal-gasto-checklist-close"><i data-lucide="x"></i></button>
+            </div>
+            <form id="form-gasto-checklist">
+                <input type="hidden" id="gasto-checklist-id">
+
+                <div class="form-group">
+                    <label for="gasto-checklist-nombre">Nombre del Gasto</label>
+                    <input type="text" id="gasto-checklist-nombre" required placeholder="Ej. Suscripción Netflix, Alquiler" maxlength="100">
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="gasto-checklist-monto">Monto a Pagar ($)</label>
+                        <input type="number" id="gasto-checklist-monto" step="0.01" min="0.01" required placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="gasto-checklist-fecha">Fecha Estimada</label>
+                        <input type="date" id="gasto-checklist-fecha" required>
+                    </div>
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="gasto-checklist-cartera">Billetera de Pago</label>
+                        <select id="gasto-checklist-cartera" required>
+                            <option value="">Seleccione cuenta...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gasto-checklist-categoria">Categoría de Gasto</label>
+                        <select id="gasto-checklist-categoria" required>
+                            <option value="">Seleccione categoría...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gasto-checklist-descripcion">Descripción / Notas (Opcional)</label>
+                    <input type="text" id="gasto-checklist-descripcion" placeholder="Ej. Vence el día 10 de cada mes" maxlength="150">
+                </div>
+
+                <!-- Permanent Switch -->
+                <div class="settings-row" style="margin: 20px 0; padding: 12px 16px; background: rgba(255, 255, 255, 0.02); border-radius: 8px; border: 1px solid var(--border-premium); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span class="settings-label" style="font-weight: 600; display: block; margin-bottom: 4px; font-size: 14px;">Gasto Recurrente (Permanente)</span>
+                        <span style="font-size: 11px; color: var(--text-muted); display: block; line-height: 1.3;">Se reactivará automáticamente al iniciar el mes. Si está inactivo, se eliminará al finalizar el mes.</span>
+                    </div>
+                    <label class="switch-premium">
+                        <input type="checkbox" id="gasto-checklist-permanente">
+                        <span class="slider-premium"></span>
+                    </label>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-gasto-checklist">Cancelar</button>
+                    <button type="submit" class="btn btn-gold" id="btn-save-gasto-checklist">Guardar Gasto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- DRAWER: PLANIFICACION PROXIMO MES -->
+    <div class="drawer-overlay" id="drawer-checklist-next-month">
+        <div class="drawer-box">
+            <div class="drawer-header">
+                <div>
+                    <h3 id="drawer-checklist-title">Planificación: Próximo Mes</h3>
+                    <p class="text-muted" id="drawer-checklist-subtitle" style="font-size:12px; margin-top:2px;">Proyección para el siguiente ciclo mensual</p>
+                </div>
+                <button class="drawer-close" id="drawer-checklist-close"><i data-lucide="x"></i></button>
+            </div>
+            <div class="drawer-body">
+                <div class="drawer-total-card" style="padding:16px; background:rgba(255,255,255,0.02); border:1px solid var(--border-premium); border-radius:10px; margin-bottom:20px;">
+                    <span style="font-size:13px; color:var(--text-muted); display:block; margin-bottom:4px;">Total Proyectado Próximo Mes</span>
+                    <h2 class="metric-value" id="drawer-checklist-total" style="font-size:24px; margin:0; font-weight:600; color:var(--text-main);">$0.00</h2>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                    <h4 style="margin:0; font-family:var(--font-heading); font-weight:600;">Gastos Registrados</h4>
+                    <button class="btn btn-outline btn-sm" id="btn-drawer-new-gasto" style="padding:4px 8px; font-size:12px;">
+                        <i data-lucide="plus" style="width:12px; height:12px;"></i><span>Agregar Gasto</span>
+                    </button>
+                </div>
+                <div class="drawer-list" id="drawer-checklist-list" style="display:flex; flex-direction:column; gap:10px; max-height:calc(100vh - 240px); overflow-y:auto; padding-right:4px;">
+                    <!-- Gastos inyectados dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- App JavaScript -->
+    <script src="js/app.js?v=1.0.2"></script>
+</body>
+
+</html>

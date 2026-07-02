@@ -1,0 +1,36 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.2.0 http://maven.apache.org/xsd/assembly-2.2.0.xsd">
+    <id>zip</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <baseDirectory>app-ahorrito</baseDirectory>
+    <fileSets>
+        <!-- Copy the bat script from root -->
+        <fileSet>
+            <directory>${project.basedir}</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>iniciar.bat</include>
+            </includes>
+        </fileSet>
+        <!-- Copy the jre folder if it exists in the root folder (handled safely by using base directory) -->
+        <fileSet>
+            <directory>${project.basedir}</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>jre/**/*</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+    <files>
+        <!-- Copy and rename the jar file so we don't have version numbers in the bat -->
+        <file>
+            <source>${project.build.directory}/${project.build.finalName}.jar</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>app-ahorrito.jar</destName>
+        </file>
+    </files>
+</assembly>

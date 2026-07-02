@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Ahorrito</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="css/styles.css?v=1.0.2">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .auth-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100vw;
+            background-color: var(--bg-main);
+            background-image: radial-gradient(circle at 50% 50%, rgba(220, 179, 66, 0.04) 0%, transparent 60%);
+            padding: 20px;
+        }
+        .auth-card {
+            background-color: var(--bg-sidebar);
+            border: 1px solid rgba(220, 179, 66, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: var(--shadow-lux), var(--shadow-gold);
+            backdrop-filter: var(--glass-blur);
+            position: relative;
+            overflow: hidden;
+            animation: cardFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes cardFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .auth-logo .logo-icon {
+            color: var(--gold);
+            filter: drop-shadow(0 0 6px rgba(220, 179, 66, 0.4));
+        }
+        .auth-logo .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 24px;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .auth-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .auth-header h2 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .auth-header p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-group label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-group input {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-premium);
+            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 12px 14px;
+            font-size: 14px;
+            transition: var(--transition-smooth);
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(220, 179, 66, 0.18);
+        }
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        .alert-error {
+            background-color: rgba(226, 97, 97, 0.12);
+            border: 1px solid rgba(226, 97, 97, 0.35);
+            color: var(--danger);
+        }
+        .alert-success {
+            background-color: rgba(82, 196, 136, 0.12);
+            border: 1px solid rgba(82, 196, 136, 0.35);
+            color: var(--green-accent);
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .auth-footer a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        .auth-footer a:hover {
+            color: var(--gold-light);
+            text-decoration: underline;
+        }
+
+        /* Recovery Code Modal */
+        .recovery-code-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: overlayFadeIn 0.3s ease forwards;
+        }
+        @keyframes overlayFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .recovery-code-modal {
+            background-color: var(--bg-sidebar);
+            border: 1px solid rgba(220, 179, 66, 0.4);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 460px;
+            width: 100%;
+            text-align: center;
+            box-shadow: var(--shadow-lux), 0 0 40px rgba(220, 179, 66, 0.15);
+            animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .recovery-code-modal .modal-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(82, 196, 136, 0.12);
+            border: 1px solid rgba(82, 196, 136, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--green-accent);
+        }
+        .recovery-code-modal h3 {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .recovery-code-modal .modal-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        .recovery-code-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(220, 179, 66, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .recovery-code-value {
+            font-family: 'Outfit', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--gold-light);
+            text-shadow: 0 0 12px rgba(220, 179, 66, 0.3);
+            user-select: all;
+        }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 8px 20px;
+            background: rgba(220, 179, 66, 0.12);
+            border: 1px solid rgba(220, 179, 66, 0.3);
+            border-radius: 8px;
+            color: var(--gold);
+            font-family: var(--font-heading);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .copy-btn:hover {
+            background: rgba(220, 179, 66, 0.2);
+            border-color: rgba(220, 179, 66, 0.5);
+        }
+        .recovery-warning {
+            background: rgba(226, 97, 97, 0.08);
+            border: 1px solid rgba(226, 97, 97, 0.25);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            text-align: left;
+        }
+        .recovery-warning i {
+            flex-shrink: 0;
+            color: var(--danger);
+            margin-top: 2px;
+        }
+        .recovery-warning span {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .password-toggle-btn {
+            transition: var(--transition-smooth);
+        }
+        .password-toggle-btn:hover {
+            color: var(--gold) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <div class="logo-icon">
+                    <i data-lucide="sparkles"></i>
+                </div>
+                <span class="logo-text">AHORRITO</span>
+            </div>
+            
+            <div class="auth-header">
+                <h2>Crear Cuenta</h2>
+                <p>Registrate para empezar a ahorrar</p>
+            </div>
+
+            <!-- Alerts -->
+            <div id="alert-error" class="alert alert-error">
+                <i data-lucide="alert-circle" style="width: 18px; height: 18px; flex-shrink: 0;"></i>
+                <span id="error-message">Error al registrar el usuario.</span>
+            </div>
+            <div id="alert-success" class="alert alert-success">
+                <i data-lucide="check-circle" style="width: 18px; height: 18px; flex-shrink: 0;"></i>
+                <span>Registro exitoso. Redirigiendo al login...</span>
+            </div>
+
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required minlength="3" placeholder="Tu nombre de usuario">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <div class="password-wrapper" style="position: relative; display: flex; align-items: center;">
+                        <input type="password" id="password" name="password" required minlength="4" placeholder="Mínimo 4 caracteres" autocomplete="new-password" spellcheck="false" autocapitalize="none" style="padding-right: 44px; width: 100%;">
+                        <button type="button" class="password-toggle-btn" tabindex="-1" aria-label="Mostrar contraseña" style="position: absolute; right: 12px; background: none; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0;">
+                            <i data-lucide="eye" class="eye-icon" style="width: 18px; height: 18px;"></i>
+                            <i data-lucide="eye-off" class="eye-off-icon" style="width: 18px; height: 18px; display: none;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirmar Contraseña</label>
+                    <div class="password-wrapper" style="position: relative; display: flex; align-items: center;">
+                        <input type="password" id="confirm-password" name="confirm-password" required minlength="4" placeholder="Repetí tu contraseña" autocomplete="new-password" spellcheck="false" autocapitalize="none" style="padding-right: 44px; width: 100%;">
+                        <button type="button" class="password-toggle-btn" tabindex="-1" aria-label="Mostrar contraseña" style="position: absolute; right: 12px; background: none; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0;">
+                            <i data-lucide="eye" class="eye-icon" style="width: 18px; height: 18px;"></i>
+                            <i data-lucide="eye-off" class="eye-off-icon" style="width: 18px; height: 18px; display: none;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-gold w-100" style="margin-top: 10px; height: 45px;">
+                    <span>Registrarse</span>
+                    <i data-lucide="user-plus" style="width: 16px; height: 16px;"></i>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                ¿Ya tenés una cuenta? <a href="login.html">Iniciá sesión aquí</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Código de Recuperación -->
+    <div id="recovery-code-overlay" class="recovery-code-overlay">
+        <div class="recovery-code-modal">
+            <div class="modal-icon">
+                <i data-lucide="shield-check" style="width: 28px; height: 28px;"></i>
+            </div>
+            <h3>¡Registro Exitoso!</h3>
+            <p class="modal-desc">Tu cuenta fue creada. Guardá este <strong>código de recuperación</strong> — es la única forma de recuperar tu contraseña si la olvidás.</p>
+            
+            <div class="recovery-code-box">
+                <div id="recovery-code-value" class="recovery-code-value">---</div>
+                <button id="copy-code-btn" class="copy-btn" type="button">
+                    <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+                    <span>Copiar código</span>
+                </button>
+            </div>
+
+            <div class="recovery-warning">
+                <i data-lucide="alert-triangle" style="width: 18px; height: 18px;"></i>
+                <span>Guardá este código en un lugar seguro. No lo vamos a mostrar de nuevo. Sin este código, no podrás recuperar tu contraseña.</span>
+            </div>
+
+            <button id="go-login-btn" class="btn btn-gold w-100" style="height: 45px;" type="button">
+                <span>Ya lo guardé, ir al login</span>
+                <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Manejar el botón de visibilidad de contraseña
+        document.querySelectorAll('.password-toggle-btn').forEach(button => {
+            const input = button.parentNode.querySelector('input');
+            const eyeIcon = button.querySelector('.eye-icon');
+            const eyeOffIcon = button.querySelector('.eye-off-icon');
+            
+            function showPassword(show) {
+                if (show) {
+                    input.type = 'text';
+                    if (eyeIcon) eyeIcon.style.display = 'none';
+                    if (eyeOffIcon) eyeOffIcon.style.display = 'block';
+                } else {
+                    input.type = 'password';
+                    if (eyeIcon) eyeIcon.style.display = 'block';
+                    if (eyeOffIcon) eyeOffIcon.style.display = 'none';
+                }
+            }
+
+            // Ocultar contraseña automáticamente al perder el foco (Medida de Seguridad)
+            input.addEventListener('blur', () => {
+                setTimeout(() => {
+                    showPassword(false);
+                }, 150); // Delay para no interferir con el evento click
+            });
+
+            button.addEventListener('click', () => {
+                showPassword(input.type === 'password');
+            });
+        });
+
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+            const errorAlert = document.getElementById('alert-error');
+            const successAlert = document.getElementById('alert-success');
+            const errorMessage = document.getElementById('error-message');
+
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                errorMessage.textContent = 'Las contraseñas no coinciden.';
+                errorAlert.style.display = 'flex';
+                return;
+            }
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const submitBtnText = submitBtn.querySelector('span');
+            const originalText = submitBtnText.textContent;
+
+            errorAlert.style.display = 'none';
+            successAlert.style.display = 'none';
+
+            // Deshabilitar botón
+            submitBtn.disabled = true;
+            submitBtnText.textContent = 'Registrando...';
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: usernameInput.value.trim(),
+                        password: passwordInput.value
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Mostrar modal con código de recuperación
+                    document.getElementById('recovery-code-value').textContent = data.recoveryCode;
+                    document.getElementById('recovery-code-overlay').style.display = 'flex';
+                    lucide.createIcons();
+                } else {
+                    errorMessage.textContent = data.message || 'Error al registrar el usuario.';
+                    errorAlert.style.display = 'flex';
+                    // Re-habilitar si falló
+                    submitBtn.disabled = false;
+                    submitBtnText.textContent = originalText;
+                }
+            } catch (err) {
+                errorMessage.textContent = 'Error de conexión con el servidor.';
+                errorAlert.style.display = 'flex';
+                // Re-habilitar si falló
+                submitBtn.disabled = false;
+                submitBtnText.textContent = originalText;
+            }
+        });
+
+        // Copiar código
+        document.getElementById('copy-code-btn').addEventListener('click', () => {
+            const code = document.getElementById('recovery-code-value').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.getElementById('copy-code-btn');
+                btn.innerHTML = '<i data-lucide="check" style="width: 14px; height: 14px;"></i><span>¡Copiado!</span>';
+                btn.style.borderColor = 'rgba(82, 196, 136, 0.5)';
+                btn.style.color = 'var(--green-accent)';
+                lucide.createIcons();
+                setTimeout(() => {
+                    btn.innerHTML = '<i data-lucide="copy" style="width: 14px; height: 14px;"></i><span>Copiar código</span>';
+                    btn.style.borderColor = '';
+                    btn.style.color = '';
+                    lucide.createIcons();
+                }, 2000);
+            });
+        });
+
+        // Ir al login
+        document.getElementById('go-login-btn').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

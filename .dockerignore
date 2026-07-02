@@ -1,0 +1,13 @@
+target/
+.git/
+.mvn/
+*.zip
+*.bat
+jdk-21.0.11+10-jre/
+jre/
+.vscode/
+HELP.md
+mvnw
+mvnw.cmd
+pom.xml.releaseBackup
+release.properties

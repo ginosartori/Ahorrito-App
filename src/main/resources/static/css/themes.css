@@ -1,0 +1,944 @@
+/* --- THEME CUSTOMIZER & PRESETS --- */
+.sidebar-customizer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border-premium);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.customizer-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.theme-toggle-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.theme-mode-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-premium);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    padding: 8px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: var(--transition-smooth);
+}
+
+.theme-mode-btn i {
+    width: 14px;
+    height: 14px;
+}
+
+.theme-mode-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.theme-mode-btn.active {
+    background: rgba(var(--gold-rgb), 0.1);
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.accent-colors-grid {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.accent-color-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.accent-color-btn:hover {
+    transform: scale(1.15);
+}
+
+.accent-color-btn.active {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 8px var(--text-primary);
+}
+
+/* Modals Presets Color Pickers */
+.color-preset-picker {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.color-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.color-btn:hover {
+    transform: scale(1.15);
+}
+
+.color-btn.active {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 10px var(--text-primary);
+}
+
+/* --- LIGHT THEME RULES --- */
+body.light-theme {
+    --bg-main: #f3f4f8;
+    --bg-sidebar: #ffffff;
+    --bg-card: rgba(255, 255, 255, 0.65);
+    --bg-card-hover: rgba(255, 255, 255, 0.85);
+    --border-premium: rgba(0, 0, 0, 0.08);
+    --border-premium-hover: rgba(0, 0, 0, 0.16);
+
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+
+    --shadow-lux: 0 8px 30px rgba(0, 0, 0, 0.03);
+    background-image: radial-gradient(circle at 80% 20%, rgba(var(--gold-rgb), 0.04) 0%, transparent 60%);
+
+    --bg-toast: rgba(255, 255, 255, 0.98);
+    --shadow-toast: 0 10px 30px rgba(0, 0, 0, 0.08), var(--shadow-gold);
+}
+
+body.light-theme .theme-mode-btn {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+body.light-theme .theme-mode-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .theme-mode-btn.active {
+    background: rgba(var(--gold-rgb), 0.08);
+}
+
+body.light-theme .modal-box {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-color: rgba(var(--gold-rgb), 0.35);
+    color: #1e293b;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), var(--shadow-gold);
+}
+
+body.light-theme .modal-header h3 {
+    color: #1e293b;
+}
+
+body.light-theme .modal-close {
+    color: #64748b;
+}
+
+body.light-theme .modal-close:hover {
+    color: #1e293b;
+}
+
+body.light-theme .form-group label {
+    color: #475569;
+}
+
+body.light-theme .filter-card input,
+body.light-theme .filter-card select,
+body.light-theme .modal-box input,
+body.light-theme .modal-box select,
+body.light-theme .modal-box textarea {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #1e293b;
+}
+
+body.light-theme .filter-card input:focus,
+body.light-theme .filter-card select:focus,
+body.light-theme .modal-box input:focus,
+body.light-theme .modal-box select:focus,
+body.light-theme .modal-box textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(var(--gold-rgb), 0.15);
+}
+
+body.light-theme .premium-table th {
+    background-color: rgba(0, 0, 0, 0.02);
+    color: #475569;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .premium-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+body.light-theme .transaction-item {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+body.light-theme .transaction-item:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+body.light-theme .event-item {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+body.light-theme .calendar-day:hover:not(.empty-day) {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+body.light-theme .calendar-day.today {
+    background-color: rgba(var(--gold-rgb), 0.06);
+}
+
+body.light-theme .btn-icon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .user-profile:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+body.light-theme .slider-premium {
+    background-color: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+body.light-theme .custom-color-hex-input {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #1e293b;
+}
+
+/* --- CARD PRESETS OVERRIDES --- */
+.card-color-gold {
+    --card-accent: #dcb342;
+    --card-accent-rgb: 220, 179, 66;
+}
+
+.card-color-green {
+    --card-accent: #52c488;
+    --card-accent-rgb: 82, 196, 136;
+}
+
+.card-color-blue {
+    --card-accent: #4fa4cf;
+    --card-accent-rgb: 79, 164, 207;
+}
+
+.card-color-purple {
+    --card-accent: #a855f7;
+    --card-accent-rgb: 168, 85, 247;
+}
+
+.card-color-rose {
+    --card-accent: #ec4899;
+    --card-accent-rgb: 236, 72, 153;
+}
+
+.card-color-red {
+    --card-accent: #e26161;
+    --card-accent-rgb: 226, 97, 97;
+}
+
+/* Apply card custom color rules dynamically */
+.wallet-card.card-color-gold,
+.wallet-card.card-color-green,
+.wallet-card.card-color-blue,
+.wallet-card.card-color-purple,
+.wallet-card.card-color-rose,
+.wallet-card.card-color-red,
+.category-card.card-color-gold,
+.category-card.card-color-green,
+.category-card.card-color-blue,
+.category-card.card-color-purple,
+.category-card.card-color-rose,
+.category-card.card-color-red {
+    border: 1px solid rgba(var(--card-accent-rgb), 0.25);
+    background: radial-gradient(circle at 100% 0%, rgba(var(--card-accent-rgb), 0.08) 0%, transparent 60%), var(--bg-card);
+}
+
+.wallet-card.card-color-gold:hover,
+.wallet-card.card-color-green:hover,
+.wallet-card.card-color-blue:hover,
+.wallet-card.card-color-purple:hover,
+.wallet-card.card-color-rose:hover,
+.wallet-card.card-color-red:hover,
+.category-card.card-color-gold:hover,
+.category-card.card-color-green:hover,
+.category-card.card-color-blue:hover,
+.category-card.card-color-purple:hover,
+.category-card.card-color-rose:hover,
+.category-card.card-color-red:hover {
+    border-color: rgba(var(--card-accent-rgb), 0.6);
+    box-shadow: 0 10px 30px rgba(var(--card-accent-rgb), 0.15), 0 10px 40px 0 rgba(0, 0, 0, 0.4);
+}
+
+.wallet-card.card-color-gold .progress-bar-fill,
+.wallet-card.card-color-green .progress-bar-fill,
+.wallet-card.card-color-blue .progress-bar-fill,
+.wallet-card.card-color-purple .progress-bar-fill,
+.wallet-card.card-color-rose .progress-bar-fill,
+.wallet-card.card-color-red .progress-bar-fill,
+.category-card.card-color-gold .progress-bar-fill,
+.category-card.card-color-green .progress-bar-fill,
+.category-card.card-color-blue .progress-bar-fill,
+.category-card.card-color-purple .progress-bar-fill,
+.category-card.card-color-rose .progress-bar-fill,
+.category-card.card-color-red .progress-bar-fill {
+    background: linear-gradient(90deg, rgba(var(--card-accent-rgb), 0.7) 0%, var(--card-accent) 100%);
+    box-shadow: 0 0 8px rgba(var(--card-accent-rgb), 0.4);
+}
+
+.wallet-card.card-color-gold .text-gold,
+.wallet-card.card-color-green .text-gold,
+.wallet-card.card-color-blue .text-gold,
+.wallet-card.card-color-purple .text-gold,
+.wallet-card.card-color-rose .text-gold,
+.wallet-card.card-color-red .text-gold,
+.category-card.card-color-gold .text-gold,
+.category-card.card-color-green .text-gold,
+.category-card.card-color-blue .text-gold,
+.category-card.card-color-purple .text-gold,
+.category-card.card-color-rose .text-gold,
+.category-card.card-color-red .text-gold {
+    color: var(--card-accent) !important;
+}
+
+/* Custom list items and lines for styled categories */
+.transaction-item.card-color-gold {
+    border-left: 3px solid #dcb342;
+}
+
+.transaction-item.card-color-green {
+    border-left: 3px solid #52c488;
+}
+
+.transaction-item.card-color-blue {
+    border-left: 3px solid #4fa4cf;
+}
+
+.transaction-item.card-color-purple {
+    border-left: 3px solid #a855f7;
+}
+
+.transaction-item.card-color-rose {
+    border-left: 3px solid #ec4899;
+}
+
+.transaction-item.card-color-red {
+    border-left: 3px solid #e26161;
+}
+
+.categoria-tag.card-color-gold {
+    border-color: rgba(220, 179, 66, 0.4);
+    color: #dcb342;
+    background: rgba(220, 179, 66, 0.08);
+}
+
+.categoria-tag.card-color-green {
+    border-color: rgba(82, 196, 136, 0.4);
+    color: #52c488;
+    background: rgba(82, 196, 136, 0.08);
+}
+
+.categoria-tag.card-color-blue {
+    border-color: rgba(79, 164, 207, 0.4);
+    color: #4fa4cf;
+    background: rgba(79, 164, 207, 0.08);
+}
+
+.categoria-tag.card-color-purple {
+    border-color: rgba(168, 85, 247, 0.4);
+    color: #a855f7;
+    background: rgba(168, 85, 247, 0.08);
+}
+
+.categoria-tag.card-color-rose {
+    border-color: rgba(236, 72, 153, 0.4);
+    color: #ec4899;
+    background: rgba(236, 72, 153, 0.08);
+}
+
+.categoria-tag.card-color-red {
+    border-color: rgba(226, 97, 97, 0.4);
+    color: #e26161;
+    background: rgba(226, 97, 97, 0.08);
+}
+
+/* ==========================================================================
+   PERSONALIZACION AVANZADA Y AJUSTES
+   ========================================================================== */
+.customizer-title {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    letter-spacing: -0.2px;
+    border-bottom: 1px solid var(--border-premium);
+    padding-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.settings-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+}
+
+/* Switch premium */
+.switch-premium {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch-premium input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider-premium {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.08);
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    border: 1px solid var(--border-premium);
+}
+
+.slider-premium:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-muted);
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+}
+
+.switch-premium input:checked + .slider-premium {
+    background-color: rgba(var(--gold-rgb), 0.2);
+    border-color: var(--gold);
+}
+
+.switch-premium input:checked + .slider-premium:before {
+    transform: translateX(20px);
+    background-color: var(--gold);
+}
+
+/* Custom color accent rows/pickers */
+.custom-accent-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px dashed var(--border-premium);
+    padding-top: 12px;
+}
+
+.color-custom-picker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.custom-color-input-wrapper {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    background-color: var(--gold);
+}
+
+.custom-color-input-wrapper:hover {
+    transform: scale(1.15);
+}
+
+.custom-color-input-wrapper.active {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 10px var(--text-primary);
+}
+
+.custom-color-input-wrapper input[type="color"] {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.custom-color-hex-input {
+    width: 80px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border-premium);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.custom-color-hex-input:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+/* Card and Tag support for custom hex colors variables */
+.wallet-card.card-custom-color,
+.category-card.card-custom-color {
+    border: 1px solid rgba(var(--card-accent-rgb), 0.25);
+    background: radial-gradient(circle at 100% 0%, rgba(var(--card-accent-rgb), 0.08) 0%, transparent 60%), var(--bg-card);
+}
+
+.wallet-card.card-custom-color:hover,
+.category-card.card-custom-color:hover {
+    border-color: rgba(var(--card-accent-rgb), 0.6);
+    box-shadow: 0 10px 30px rgba(var(--card-accent-rgb), 0.15), 0 10px 40px 0 rgba(0, 0, 0, 0.4);
+}
+
+.wallet-card.card-custom-color .progress-bar-fill,
+.category-card.card-custom-color .progress-bar-fill {
+    background: linear-gradient(90deg, rgba(var(--card-accent-rgb), 0.7) 0%, var(--card-accent) 100%);
+    box-shadow: 0 0 8px rgba(var(--card-accent-rgb), 0.4);
+}
+
+.wallet-card.card-custom-color .text-gold,
+.category-card.card-custom-color .text-gold {
+    color: var(--card-accent) !important;
+}
+
+.transaction-item.card-custom-color {
+    border-left: 3px solid var(--card-accent);
+}
+
+.categoria-tag.card-custom-color {
+    border-color: rgba(var(--card-accent-rgb), 0.4);
+    color: var(--card-accent);
+    background: rgba(var(--card-accent-rgb), 0.08);
+}
+
+/* Transparencies Off Override */
+body.no-transparency {
+    --glass-blur: none !important;
+    --bg-card: #16161f;
+    --bg-card-hover: #22222d;
+    --border-premium: #242432;
+    --border-premium-hover: #2e2e3f;
+}
+
+body.no-transparency .sidebar {
+    background-color: #171721 !important;
+}
+
+body.no-transparency .topbar {
+    background-color: #101015 !important;
+}
+
+body.no-transparency .modal-box {
+    background-color: #181820 !important;
+}
+
+body.no-transparency .theme-popover-menu {
+    background-color: #171721 !important;
+}
+
+body.light-theme.no-transparency {
+    --bg-card: #ffffff;
+    --bg-card-hover: #f1f3f9;
+    --border-premium: #e2e8f0;
+    --border-premium-hover: #cbd5e1;
+}
+
+body.light-theme.no-transparency .sidebar {
+    background-color: #ffffff !important;
+}
+
+body.light-theme.no-transparency .topbar {
+    background-color: #f3f4f8 !important;
+}
+
+body.light-theme.no-transparency .modal-box {
+    background-color: #ffffff !important;
+}
+
+body.light-theme.no-transparency .theme-popover-menu {
+    background-color: #ffffff !important;
+}
+
+/* Performance Mode: Animations Off Override */
+body.no-animations *,
+body.no-animations *:before,
+body.no-animations *:after {
+    animation: none !important;
+    transition: none !important;
+}
+
+body.no-animations .metric-card:hover,
+body.no-animations .wallet-card:hover,
+body.no-animations .category-card:hover,
+body.no-animations .transaction-item:hover,
+body.no-animations .accent-color-btn:hover,
+body.no-animations .custom-color-input-wrapper:hover,
+body.no-animations .btn:hover {
+    transform: none !important;
+}
+
+/* --- THEME CUSTOMIZER MULTI-THEME REDESIGN --- */
+.themes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.theme-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-premium);
+    border-radius: 8px;
+    padding: 10px 4px 8px 4px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.theme-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--text-muted);
+}
+
+.theme-btn.active {
+    background: rgba(var(--gold-rgb), 0.1);
+    border-color: var(--gold);
+}
+
+.theme-color-preview {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: block;
+}
+
+body.light-theme .theme-btn {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: var(--border-premium);
+}
+
+body.light-theme .theme-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .theme-btn.active {
+    background: rgba(var(--gold-rgb), 0.08);
+}
+
+.theme-btn-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.theme-btn.active .theme-btn-label {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/* --- UNIFIED THEME CLASS DEFINITIONS --- */
+
+/* 1. Classic Dark Theme */
+body.theme-classic-dark {
+    --bg-main: #101015;
+    --bg-sidebar: #171721;
+    --bg-card: rgba(28, 28, 36, 0.48);
+    --bg-card-hover: rgba(40, 40, 52, 0.58);
+    --border-premium: rgba(255, 255, 255, 0.11);
+    --border-premium-hover: rgba(255, 255, 255, 0.22);
+    --text-primary: #ffffff;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --gold: #dcb342;
+    --gold-rgb: 220, 179, 66;
+    --gold-light: #f3d478;
+    --gold-dark: #b89128;
+    --shadow-lux: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
+    --shadow-gold: 0 0 25px rgba(220, 179, 66, 0.12);
+}
+
+/* 2. Classic Light Theme */
+body.theme-classic-light {
+    --bg-main: #f3f4f8;
+    --bg-sidebar: #ffffff;
+    --bg-card: #ffffff; /* Reduced transparency / Solid white */
+    --bg-card-hover: #f8fafc;
+    --border-premium: rgba(0, 0, 0, 0.08);
+    --border-premium-hover: rgba(0, 0, 0, 0.16);
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --gold: #dcb342;
+    --gold-rgb: 220, 179, 66;
+    --gold-light: #f3d478;
+    --gold-dark: #b89128;
+    --shadow-lux: 0 8px 30px rgba(0, 0, 0, 0.03);
+    --shadow-gold: 0 0 25px rgba(220, 179, 66, 0.06);
+}
+
+/* 3. Crema/Beige Theme */
+body.theme-crema-beige {
+    --bg-main: #fcf9f2; /* Cream beige background */
+    --bg-sidebar: #f5efe0; /* Slightly darker cream sidebar */
+    --bg-card: #ffffff; /* Solid cards for maximum contrast */
+    --bg-card-hover: #faf6eb;
+    --border-premium: rgba(141, 110, 99, 0.18);
+    --border-premium-hover: rgba(141, 110, 99, 0.3);
+    --text-primary: #3e2723; /* Dark brown instead of dark gray/black */
+    --text-secondary: #5d4037;
+    --text-muted: #8d6e63;
+    --gold: #b89128; /* Warm bronze/gold accent */
+    --gold-rgb: 184, 145, 40;
+    --gold-light: #dcb342;
+    --gold-dark: #8c6a1a;
+    --shadow-lux: 0 8px 30px rgba(141, 110, 99, 0.04);
+    --shadow-gold: 0 0 25px rgba(141, 110, 99, 0.08);
+}
+
+/* 4. Ciruela Cálida (Plum - Refined Amethyst) */
+body.theme-plum {
+    --bg-main: #0c0612;
+    --bg-sidebar: #140b1e;
+    --bg-card: rgba(32, 16, 48, 0.5); /* Transparent / glassmorphism */
+    --bg-card-hover: rgba(45, 23, 68, 0.65);
+    --border-premium: rgba(192, 132, 252, 0.12);
+    --border-premium-hover: rgba(192, 132, 252, 0.25);
+    --text-primary: #f5f2fa;
+    --text-secondary: #d8cedf;
+    --text-muted: #806f8c;
+    --gold: #c084fc;
+    --gold-rgb: 192, 132, 252;
+    --gold-light: #e9d5ff;
+    --gold-dark: #7e22ce;
+    --shadow-lux: 0 10px 40px rgba(0, 0, 0, 0.6);
+    --shadow-gold: 0 0 25px rgba(192, 132, 252, 0.1);
+    background-image: radial-gradient(circle at 80% 20%, rgba(var(--gold-rgb), 0.05) 0%, transparent 60%);
+}
+
+/* 5. Bosque Esmeralda (Green Dark Theme - Refined Forest Spruce) */
+body.theme-emerald {
+    --bg-main: #070e0b;
+    --bg-sidebar: #0d1813;
+    --bg-card: rgba(20, 36, 29, 0.5); /* Transparent / glassmorphism */
+    --bg-card-hover: rgba(30, 54, 44, 0.65);
+    --border-premium: rgba(82, 196, 136, 0.12);
+    --border-premium-hover: rgba(82, 196, 136, 0.25);
+    --text-primary: #f0f5f2;
+    --text-secondary: #cedad3;
+    --text-muted: #758b80;
+    --gold: #52c488;
+    --gold-rgb: 82, 196, 136;
+    --gold-light: #7be3ab;
+    --gold-dark: #3aa66e;
+    --shadow-lux: 0 10px 40px rgba(0, 0, 0, 0.6);
+    --shadow-gold: 0 0 25px rgba(82, 196, 136, 0.12);
+    background-image: radial-gradient(circle at 80% 20%, rgba(var(--gold-rgb), 0.05) 0%, transparent 60%);
+}
+
+/* 6. Zafiro Nocturno (Blue Dark Theme) */
+body.theme-sapphire {
+    --bg-main: #030a16;
+    --bg-sidebar: #081427;
+    --bg-card: rgba(12, 28, 55, 0.48); /* Transparent / glassmorphism */
+    --bg-card-hover: rgba(20, 44, 85, 0.58);
+    --border-premium: rgba(79, 164, 207, 0.15);
+    --border-premium-hover: rgba(79, 164, 207, 0.3);
+    --text-primary: #e0f2fe;
+    --text-secondary: #bae6fd;
+    --text-muted: #3782aa;
+    --gold: #4fa4cf;
+    --gold-rgb: 79, 164, 207;
+    --gold-light: #7ed0f5;
+    --gold-dark: #3782aa;
+    --shadow-lux: 0 10px 40px rgba(0, 0, 0, 0.6);
+    --shadow-gold: 0 0 25px rgba(79, 164, 207, 0.12);
+    background-image: radial-gradient(circle at 80% 20%, rgba(var(--gold-rgb), 0.06) 0%, transparent 60%);
+}
+
+/* 7. Cobre Imperial (Carbon & Rose Copper Premium) */
+body.theme-carbon-copper {
+    --bg-main: #09090b;             /* Carbono absoluto */
+    --bg-sidebar: #121214;          /* Grafito oscuro */
+    --bg-card: rgba(24, 24, 27, 0.6); /* Transparencia ahumada */
+    --bg-card-hover: rgba(39, 39, 42, 0.7);
+    --border-premium: rgba(251, 146, 60, 0.12); /* Brillo cobre sutil */
+    --border-premium-hover: rgba(251, 146, 60, 0.25);
+    --text-primary: #fafafa;         /* Blanco puro suave */
+    --text-secondary: #e4e4e7;       /* Gris platino */
+    --text-muted: #a1a1aa;           /* Gris piedra */
+    --gold: #f97316;                 /* Cobre principal */
+    --gold-rgb: 249, 115, 22;
+    --gold-light: #fdba74;           /* Cobre brillante */
+    --gold-dark: #ea580c;            /* Cobre quemado */
+    --shadow-lux: 0 10px 40px rgba(0, 0, 0, 0.85);
+    --shadow-gold: 0 0 25px rgba(249, 115, 22, 0.1);
+    background-image: radial-gradient(circle at 80% 20%, rgba(249, 115, 22, 0.04) 0%, transparent 60%);
+}
+
+/* 8. Tundra Aurora (Midnight Aurora Teal Premium) */
+body.theme-midnight-aurora {
+    --bg-main: #050811;             /* Azul tundra ultra-oscuro */
+    --bg-sidebar: #0b1122;          /* Azul marino mineral */
+    --bg-card: rgba(18, 28, 54, 0.45); /* Vidrio tundra */
+    --bg-card-hover: rgba(28, 42, 78, 0.55);
+    --border-premium: rgba(45, 212, 191, 0.12); /* Brillo aurora cian */
+    --border-premium-hover: rgba(45, 212, 191, 0.25);
+    --text-primary: #f0fdfa;         /* Blanco menta glaciar */
+    --text-secondary: #ccfbf1;       /* Menta suave */
+    --text-muted: #64748b;           /* Gris azulado pizarra */
+    --gold: #2dd4bf;                 /* Aurora Teal */
+    --gold-rgb: 45, 212, 191;
+    --gold-light: #99f6e4;           /* Aurora brillante */
+    --gold-dark: #0d9488;            /* Teal profundo */
+    --shadow-lux: 0 10px 40px rgba(0, 0, 0, 0.7);
+    --shadow-gold: 0 0 25px rgba(45, 212, 191, 0.12);
+    background-image: radial-gradient(circle at 80% 20%, rgba(45, 212, 191, 0.05) 0%, transparent 60%);
+}
+
+/* ==========================================================================
+   ILUMINACION AMBIENTAL DINAMICA (TEMA A)
+   ========================================================================== */
+.ambient-glow-1 {
+    position: fixed;
+    top: -150px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.06;
+    filter: blur(140px);
+    pointer-events: none;
+    z-index: -1;
+    transition: background 0.8s ease, opacity 0.8s ease;
+}
+
+.ambient-glow-2 {
+    position: fixed;
+    bottom: -150px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.05;
+    filter: blur(140px);
+    pointer-events: none;
+    z-index: -1;
+    transition: background 0.8s ease, opacity 0.8s ease;
+}
+
+/* Desactivar resplandor ambiental si no hay soporte de transparencia */
+body.no-transparency .ambient-glow-1,
+body.no-transparency .ambient-glow-2 {
+    display: none !important;
+}
+
+/* ==========================================================================
+   SKELETON LOADING EFFECTS (TEMA C)
+   ========================================================================== */
+.loading-skeleton {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading-skeleton .metric-value {
+    min-height: 32px;
+    width: 70%;
+    margin-top: 8px;
+    background: linear-gradient(95deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.04) 75%) !important;
+    background-size: 200% 100% !important;
+    animation: shimmer-effect 1.5s infinite linear !important;
+    border-radius: 4px;
+    color: transparent !important;
+}
+
+.loading-skeleton .metric-title,
+.loading-skeleton .metric-footer,
+.loading-skeleton .card-title,
+.loading-skeleton .chart-container {
+    background: linear-gradient(95deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.04) 75%) !important;
+    background-size: 200% 100% !important;
+    animation: shimmer-effect 1.5s infinite linear !important;
+    color: transparent !important;
+    border-radius: 4px;
+}
+
+.loading-skeleton .metric-icon {
+    visibility: hidden;
+}
+
+.loading-skeleton .chart-container canvas {
+    opacity: 0 !important;
+}
+
+body.light-theme .loading-skeleton .metric-value,
+body.light-theme .loading-skeleton .metric-title,
+body.light-theme .loading-skeleton .metric-footer,
+body.light-theme .loading-skeleton .card-title,
+body.light-theme .loading-skeleton .chart-container {
+    background: linear-gradient(95deg, rgba(0, 0, 0, 0.04) 25%, rgba(0, 0, 0, 0.09) 50%, rgba(0, 0, 0, 0.04) 75%) !important;
+    background-size: 200% 100% !important;
+}
+
+@keyframes shimmer-effect {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
